@@ -60,6 +60,7 @@ All content is defined in `js/data/sections.js` as the `APP_SECTIONS` array.
 | type | Purpose | Key fields |
 |------|---------|------------|
 | `verse` | Quranic verse | `arabic`, `reference`, `translations[]` |
+| `verseGroup` | Multiple verses — Arabic first, then Malay | `verses[]`, `translations[]` |
 | `zikir` | Dhikr/supplication | `arabic`, `malay`, `english` (optional) |
 | `instruction` | Practice guidance | `text` (supports `<em>` for emphasis) |
 | `text` | Plain paragraph | `text` |
@@ -127,9 +128,13 @@ Navigation and rendering update automatically — no changes needed in `app.js` 
 
 ## Current Sections
 
-1. **Zikir dan Amalan Melawan Sihir** — 3 Qul, Yunus 81–82, Al-Zalzalah, La ilaha illallah zikir
-2. **Amalan Pendinding** — Pagar diri ritual (Al-Fatihah, Ayat Kursi 7×, doa, 3 Qul)
-3. **Amalan Pendinding Kawasan Rumah** — Placeholder (content pending)
+1. **Zikir dan Amalan Melawan Sihir** (Rujukan: Ustaz Ahmad Dusuki) — Berwuduk, 3 Qul (×3), Yunus 81–82, Al-Zalzalah, La ilaha illallah zikir, mandian, 3 Qul sebelum tidur
+2. **Amalan Pendinding** — Pagar diri ritual (Al-Fatihah, Ayat Kursi 7×, doa pelindung, 3 Qul)
+3. **Air Penawar Membatalkan Sihir** — Kaedah persediaan, bacaan (Al-Fatihah 7×, Selawat 7×, Ayat Kursi 313×, 3 Qul 3×), doa penawar
+
+## Shared Content
+
+Reusable Arabic and Malay texts are defined in the `SHARED` object at the top of `sections.js` (3 Qul, Al-Fatihah, Ayat Kursi, selawat, etc.). Use `tigaQulBlocks(repeatNote)` helper to render all three Qul surahs with Malay translation.
 
 ## Design Notes
 
@@ -149,7 +154,6 @@ No build step. All paths are relative.
 
 ## Future Enhancements (not yet implemented)
 
-- Section 3 content (Amalan Pendinding Kawasan Rumah)
 - Bookmark / last-read position (localStorage)
 - Dark/light theme toggle
 - Offline support (service worker)

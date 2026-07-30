@@ -10,6 +10,33 @@
 
   /* ── Content block renderers ───────────────────────────────── */
 
+  function renderVerseGroup(block) {
+    let html = `<div class="content-block">`;
+    html += `<span class="content-label label-arabic">Arab</span>`;
+    block.verses.forEach(function (v) {
+      html += `<p class="arabic verse-block">${escapeHtml(v.arabic).replace(/\n/g, "<br>")}</p>`;
+      if (v.reference) {
+        html += `<span class="verse-ref">${escapeHtml(v.reference)}</span>`;
+      }
+    });
+    if (block.translations && block.translations.length) {
+      html += `<span class="content-label label-malay">Melayu</span>`;
+      block.translations.forEach(function (t) {
+        html += `<p class="translation translation-malay">`;
+        if (t.source) {
+          html += `<span class="translation-source">${escapeHtml(t.source)}</span>`;
+        }
+        if (t.reference) {
+          html += `<span class="translation-source">${escapeHtml(t.reference)}</span>`;
+        }
+        html += escapeHtml(t.text);
+        html += `</p>`;
+      });
+    }
+    html += `</div>`;
+    return html;
+  }
+
   function renderVerse(block) {
     let html = `<div class="content-block">`;
     html += `<span class="content-label label-arabic">Arab</span>`;
@@ -93,6 +120,7 @@
   }
 
   const RENDERERS = {
+    verseGroup: renderVerseGroup,
     verse: renderVerse,
     zikir: renderZikir,
     instruction: renderInstruction,
